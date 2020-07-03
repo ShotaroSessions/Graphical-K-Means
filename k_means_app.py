@@ -24,12 +24,15 @@ def start_app():
         k = int(input('Enter k: '))
 
         print(df.columns)
-        print('Enter columns to consider.')
-        columns = input('Enter columns to consider. (seperated by spaces):\n').split()
-        while columns not in df.columns:
+
+        valid_columns = False
+        while not valid_columns:
             columns = input('Enter columns to consider. (seperated by spaces):\n').split()
-        
-        print(columns)
+            valid_columns = True
+            for column in columns:
+                if column not in df.columns:
+                    valid_columns = False
+
         if len(columns) == 2:
             centroids = generate_centroids(df, k, columns)
             groups = assign_to_centroids(df, centroids, columns)
