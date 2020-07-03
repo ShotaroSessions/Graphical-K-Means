@@ -9,8 +9,6 @@ from k_means import (generate_centroids, assign_to_centroids,
 from live_k_means import AnimatedScatter
 
 
-
-
 def start_app():
 
     print('Welcome to the K Means App!')
@@ -27,7 +25,10 @@ def start_app():
 
         print(df.columns)
         print('Enter columns to consider.')
-        columns = input('(seperated by spaces): ').split()
+        columns = input('Enter columns to consider. (seperated by spaces):\n').split()
+        while columns not in df.columns:
+            columns = input('Enter columns to consider. (seperated by spaces):\n').split()
+        
         print(columns)
         if len(columns) == 2:
             centroids = generate_centroids(df, k, columns)
